@@ -1,0 +1,30 @@
+@page "{beatId:int}"
+@model BeatSync.Web.Pages.Checkout.IndexModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+
+@if (Model.Beat == null || Model.License == null)
+{
+    <div class="alert alert-danger">Invalid license selection.</div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Beat.Title</h5>
+            <p class="card-text">
+                <strong>License:</strong> @Model.License.LicenseType<br />
+                <strong>Price:</strong> $@Model.License.Price
+            </p>
+            <div class="d-flex gap-2">
+                <a class="btn btn-dark" href="#">Pay with Stripe (placeholder)</a>
+                <a class="btn btn-warning" href="#">Pay with PayPal (placeholder)</a>
+            </div>
+        </div>
+    </div>
+}
+
+

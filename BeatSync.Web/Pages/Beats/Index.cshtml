@@ -1,0 +1,56 @@
+@page
+@model BeatSync.Web.Pages.Beats.IndexModel
+@{
+    ViewData["Title"] = "Beats";
+}
+
+<h2 class="mb-3">Beats</h2>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-3">
+        <input asp-for="Filter.Genre" class="form-control" placeholder="Genre" />
+    </div>
+    <div class="col-md-3">
+        <input asp-for="Filter.Mood" class="form-control" placeholder="Mood" />
+    </div>
+    <div class="col-md-2">
+        <input asp-for="Filter.Key" class="form-control" placeholder="Key" />
+    </div>
+    <div class="col-md-2">
+        <input asp-for="Filter.BpmMin" class="form-control" placeholder="BPM min" />
+    </div>
+    <div class="col-md-2">
+        <input asp-for="Filter.BpmMax" class="form-control" placeholder="BPM max" />
+    </div>
+    <div class="col-12">
+        <button class="btn cta">Filter</button>
+    </div>
+    <input type="hidden" name="page" value="@Model.Page" />
+    <input type="hidden" name="pageSize" value="@Model.PageSize" />
+    
+</form>
+
+<div class="grid-tiles">
+@foreach (var beat in Model.Beats)
+{
+    <div>
+        <div class="card h-100 bs">
+            @if (!string.IsNullOrEmpty(beat.CoverImagePath))
+            {
+                <img src="@beat.CoverImagePath" class="card-img-top" alt="@beat.Title" />
+            }
+            <div class="card-body">
+                <h5 class="card-title">@beat.Title</h5>
+                <p class="card-text">
+                    <small>@beat.Genre</small>
+                    @if (beat.Bpm.HasValue){<span> · @beat.Bpm BPM</span>}
+                    @if (!string.IsNullOrEmpty(beat.Key)){<span> · Key @beat.Key</span>}
+                </p>
+                <a class="btn btn-outline-primary" asp-page="/Beats/Details" asp-route-id="@beat.Id">View</a>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+
