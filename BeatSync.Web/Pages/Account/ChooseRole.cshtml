@@ -1,0 +1,18 @@
+@page
+@model BeatSync.Web.Pages.Account.ChooseRoleModel
+@{
+    ViewData["Title"] = "Choose Role";
+}
+
+<h2>Choose your role</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Select Role</label>
+        <select asp-for="SelectedRole" class="form-select">
+            <option value="Producer">Producer</option>
+            <option value="Artist">Artist</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

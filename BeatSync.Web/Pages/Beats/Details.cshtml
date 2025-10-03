@@ -1,0 +1,41 @@
+@page "{id:int}"
+@model BeatSync.Web.Pages.Beats.DetailsModel
+@{
+    ViewData["Title"] = Model.Beat.Title;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>@Model.Beat.Title</h2>
+        <p>
+            <strong>Genre:</strong> @Model.Beat.Genre
+            @if (Model.Beat.Bpm.HasValue){<span> · <strong>BPM:</strong> @Model.Beat.Bpm</span>}
+            @if (!string.IsNullOrEmpty(Model.Beat.Key)){<span> · <strong>Key:</strong> @Model.Beat.Key</span>}
+            @if (!string.IsNullOrEmpty(Model.Beat.Mood)){<span> · <strong>Mood:</strong> @Model.Beat.Mood</span>}
+        </p>
+        <audio controls src="@Model.Beat.AudioFilePath" class="w-100"></audio>
+
+        <h4 class="mt-4">Licenses</h4>
+        <ul class="list-group">
+        @foreach (var license in Model.Beat.LicenseOptions.OrderBy(l => l.Price))
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="background:#0f1115;color:#e6e9ef;border-color:#252a33;">
+                <span>@license.LicenseType</span>
+                <span>
+                    $@license.Price
+                    <a class="btn btn-sm cta ms-2" asp-page="/Checkout/Index" asp-route-beatId="@Model.Beat.Id" asp-route-licenseType="@license.LicenseType">Buy</a>
+                </span>
+            </li>
+        }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.Beat.CoverImagePath))
+        {
+            <img src="@Model.Beat.CoverImagePath" class="img-fluid rounded" alt="Cover" />
+        }
+    </div>
+    
+</div>
+
+
