@@ -1,0 +1,49 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+App_Data/
+appsettings.*.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Build outputs
+**/bin/
+**/obj/
+**/Debug/
+**/Release/
+
+# ASP.NET / static files
+wwwroot/node_modules/
+wwwroot/dist/
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# EF Core local DB
+*.db
+app.db
+
+# User-specific files
+*.swp
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# dotnet tool manifest
+.nuget/
+
+# Temporary files
+*.tmp
